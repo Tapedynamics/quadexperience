@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import PriceTable from '../components/PriceTable.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'it';
+const currentPath = '/prezzi';
+
+const ctaContent = {
+  title: "Hai Domande sui Prezzi?",
+  subtitle: "Contattaci per preventivi personalizzati o sconti per gruppi numerosi",
+  primaryCTA: {
+    text: "Richiedi Preventivo",
+    link: "/contatti"
+  },
+  secondaryCTA: {
+    text: "Chiamaci Ora",
+    link: "tel:+34922123456"
+  }
+};
+---
+
+<BaseLayout
+  title="Prezzi Tour Quad Tenerife | Tenerife Quad Experience"
+  description="Prezzi trasparenti per i nostri tour in quad a Tenerife. Nessun costo nascosto. Sconti per gruppi. Prenota la tua avventura!"
+  lang={lang}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Prezzi Tour Quad
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Prezzi chiari e trasparenti per le tue avventure in quad a Tenerife.
+          Nessun costo nascosto, massima qualità garantita.
+        </p>
+      </div>
+    </section>
+
+    <!-- Price Table Section -->
+    <PriceTable lang={lang} />
+
+    <!-- Additional Info -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+            Informazioni Importanti sui Prezzi
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-green-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-green-800 mb-4">✅ Incluso nel Prezzo</h3>
+              <ul class="space-y-2 text-green-700">
+                <li>• Quad 4x4 automatico di ultima generazione</li>
+                <li>• Casco e attrezzature di sicurezza</li>
+                <li>• Guida professionale multilingue</li>
+                <li>• Assicurazione completa</li>
+                <li>• Briefing di sicurezza dettagliato</li>
+                <li>• Foto ricordo del tour</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-blue-800 mb-4">💰 Sconti e Offerte</h3>
+              <ul class="space-y-2 text-blue-700">
+                <li>• <strong>Gruppi 4+ persone:</strong> 10% di sconto</li>
+                <li>• <strong>Gruppi 8+ persone:</strong> 15% di sconto</li>
+                <li>• <strong>Prenotazione online:</strong> 5% extra sconto</li>
+                <li>• <strong>Clienti abituali:</strong> Carta fedeltà</li>
+                <li>• <strong>Bassa stagione:</strong> Tariffe ridotte</li>
+                <li>• <strong>Last minute:</strong> Offerte speciali</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-8 p-6 bg-yellow-50 rounded-lg">
+            <h3 class="text-xl font-semibold text-yellow-800 mb-4">⚠️ Politiche di Cancellazione</h3>
+            <div class="text-yellow-700 space-y-2">
+              <p><strong>Cancellazione gratuita:</strong> fino a 24 ore prima del tour</p>
+              <p><strong>Cancellazione entro 24 ore:</strong> penale del 50%</p>
+              <p><strong>Maltempo:</strong> rimborso completo o riprogrammazione gratuita</p>
+              <p><strong>Emergenze mediche:</strong> rimborso completo con certificato medico</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <FAQ lang={lang} />
+
+    <!-- CTA Section -->
+    <CTA
+      title={ctaContent.title}
+      subtitle={ctaContent.subtitle}
+      primaryCTA={ctaContent.primaryCTA}
+      secondaryCTA={ctaContent.secondaryCTA}
+      backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+    />
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import TourCard from '../components/TourCard.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'it';
+const currentPath = '/tour';
+
+// Get all Italian tours
+const tours = await getCollection('tours', ({ data }) => {
+  return data.lang === 'it';
+});
+---
+
+<BaseLayout
+  title="I Nostri Tour in Quad a Tenerife | Tenerife Quad Experience"
+  description="Scopri tutti i nostri tour in quad a Tenerife: dal vulcano Teide alle coste spettacolari. Avventure per tutti i livelli con guide professionali."
+  lang={lang}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          I Nostri Tour in Quad
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Scegli la tua avventura perfetta tra paesaggi vulcanici mozzafiato, coste spettacolari e sentieri nascosti di Tenerife.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tours Grid -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        {tours.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tours.map((tour) => (
+              <TourCard
+                title={tour.data.title}
+                description={tour.data.description}
+                image={tour.data.image}
+                price={tour.data.price}
+                duration={tour.data.duration}
+                difficulty={tour.data.difficulty}
+                terrain={tour.data.terrain}
+                slug={tour.slug}
+                lang={tour.data.lang}
+                maxParticipants={tour.data.maxParticipants}
+                featured={tour.data.featured}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+              Tour in arrivo!
+            </h3>
+            <p class="text-gray-600">
+              Stiamo preparando i nostri tour più emozionanti. Torna presto per scoprire le nostre avventure!
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>

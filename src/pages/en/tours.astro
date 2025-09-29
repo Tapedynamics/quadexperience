@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import TourCard from '../../components/TourCard.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const currentPath = '/en/tours';
+
+// Get all English tours (for now we'll show Italian tours as placeholders)
+const tours = await getCollection('tours', ({ data }) => {
+  return data.lang === 'it'; // Using Italian tours as placeholder for now
+});
+---
+
+<BaseLayout
+  title="Our Quad Tours in Tenerife | Tenerife Quad Experience"
+  description="Discover all our quad tours in Tenerife: from Teide volcano to spectacular coasts. Adventures for all levels with professional guides."
+  lang={lang}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Our Quad Tours
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Choose your perfect adventure through breathtaking volcanic landscapes, spectacular coasts and hidden trails of Tenerife.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tours Grid -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        {tours.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tours.map((tour) => (
+              <TourCard
+                title={tour.data.title}
+                description={tour.data.description}
+                image={tour.data.image}
+                price={tour.data.price}
+                duration={tour.data.duration}
+                difficulty={tour.data.difficulty}
+                terrain={tour.data.terrain}
+                slug={tour.slug}
+                lang="en"
+                maxParticipants={tour.data.maxParticipants}
+                featured={tour.data.featured}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+              Tours Coming Soon!
+            </h3>
+            <p class="text-gray-600">
+              We're preparing our most exciting tours. Come back soon to discover our adventures!
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>

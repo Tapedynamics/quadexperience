@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'it';
+const currentPath = '/galleria';
+
+// Sample gallery images using Unsplash
+const galleryImages = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1544737151188-6e4c999de2a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Tour in quad al Teide",
+    category: "Teide"
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Tour costiero in quad",
+    category: "Costa"
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Paesaggio vulcanico Tenerife",
+    category: "Paesaggi"
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Gruppo quad adventure",
+    category: "Gruppi"
+  },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Vista panoramica Canarie",
+    category: "Paesaggi"
+  },
+  {
+    id: 6,
+    src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Tour alba Teide",
+    category: "Teide"
+  },
+  {
+    id: 7,
+    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Costa atlantica Tenerife",
+    category: "Costa"
+  },
+  {
+    id: 8,
+    src: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Famiglia in quad tour",
+    category: "Gruppi"
+  },
+  {
+    id: 9,
+    src: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    alt: "Tramonto vulcanico",
+    category: "Paesaggi"
+  }
+];
+
+const categories = ["Tutti", "Teide", "Costa", "Paesaggi", "Gruppi"];
+---
+
+<BaseLayout
+  title="Galleria Foto Tour Quad Tenerife | Tenerife Quad Experience"
+  description="Scopri la bellezza dei nostri tour in quad attraverso la nostra galleria fotografica. Paesaggi vulcanici, coste spettacolari e momenti indimenticabili."
+  lang={lang}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <main class="pt-20">
+    <!-- Page Header -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Galleria Fotografica
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Rivivi le emozioni dei nostri tour attraverso gli scatti più belli di Tenerife.
+          Paesaggi mozzafiato, avventure indimenticabili e sorrisi dei nostri clienti.
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="py-8 bg-white border-b">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-center gap-4">
+          {categories.map((category) => (
+            <button
+              class="px-6 py-2 rounded-full border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200 filter-btn"
+              data-filter={category.toLowerCase()}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+          {galleryImages.map((image) => (
+            <div
+              class="gallery-item group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              data-category={image.category.toLowerCase()}
+            >
+              <div class="relative aspect-square overflow-hidden">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                  <span class="text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {image.alt}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Vuoi Scattare Foto Come Queste?
+          </h2>
+          <p class="text-xl text-gray-600 mb-8">
+            Prenota il tuo tour e porta a casa ricordi indimenticabili
+          </p>
+          <a
+            href="/contatti"
+            class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            Prenota il Tuo Tour
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<script>
+  // Gallery filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        // Update active button
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-orange-500', 'text-white');
+          btn.classList.add('text-orange-500');
+        });
+        button.classList.add('bg-orange-500', 'text-white');
+        button.classList.remove('text-orange-500');
+
+        // Filter gallery items
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+
+          if (filter === 'tutti' || filter === category) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeIn 0.5s ease-in';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Set initial active filter
+    filterButtons[0].classList.add('bg-orange-500', 'text-white');
+    filterButtons[0].classList.remove('text-orange-500');
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
