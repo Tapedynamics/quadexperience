@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import USPSection from '../../components/USPSection.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const currentPath = '/en';
+
+const heroContent = {
+  title: "Quad Adventures in Tenerife",
+  subtitle: "Explore volcanic landscapes and spectacular coasts of the Canary Islands with our guided tours",
+  ctaText: "Book Your Adventure",
+  ctaLink: "/en/contact"
+};
+
+const ctaContent = {
+  title: "Ready for Adventure?",
+  subtitle: "Book your quad tour now and discover Tenerife like never before",
+  primaryCTA: {
+    text: "Book Now",
+    link: "/en/contact"
+  },
+  secondaryCTA: {
+    text: "View All Tours",
+    link: "/en/tours"
+  }
+};
+---
+
+<BaseLayout
+  title="Tenerife Quad Experience - Quad Tours in the Canary Islands"
+  description="Discover Tenerife with our quad tours. Explore Teide volcano and spectacular coasts with professional guides. Book your adventure!"
+  lang={lang}
+  organization={true}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <Hero
+    title={heroContent.title}
+    subtitle={heroContent.subtitle}
+    ctaText={heroContent.ctaText}
+    ctaLink={heroContent.ctaLink}
+    videoSrc="/videos/hero-quad-tenerife.mp4"
+    backgroundImage="/images/tenerife-quad-hero.jpg"
+  />
+
+  <USPSection lang={lang} />
+
+  <PriceTable lang={lang} />
+
+  <Testimonial lang={lang} />
+
+  <FAQ lang={lang} />
+
+  <CTA
+    title={ctaContent.title}
+    subtitle={ctaContent.subtitle}
+    primaryCTA={ctaContent.primaryCTA}
+    secondaryCTA={ctaContent.secondaryCTA}
+    backgroundImage="/images/cta-teide-sunset.jpg"
+  />
+
+  <Footer lang={lang} />
+</BaseLayout>

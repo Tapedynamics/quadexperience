@@ -1,0 +1,183 @@
+---
+export interface Props {
+  lang: 'it' | 'en' | 'es' | 'fr';
+}
+
+const { lang } = Astro.props;
+
+const content = {
+  it: {
+    title: "Perché Scegliere Tenerife Quad Experience",
+    subtitle: "La tua avventura in quad con la massima sicurezza e professionalità",
+    features: [
+      {
+        icon: "🏆",
+        title: "Guide Esperte",
+        description: "Guide locali certificate con anni di esperienza che conoscono ogni angolo dell'isola"
+      },
+      {
+        icon: "🚗",
+        title: "Quad di Ultima Generazione",
+        description: "Flotta moderna con quad 4x4 automatici, sicuri e facili da guidare per tutti"
+      },
+      {
+        icon: "📸",
+        title: "Foto Incluse",
+        description: "Riceverai tutte le foto del tuo tour per conservare per sempre questi momenti"
+      },
+      {
+        icon: "🛡️",
+        title: "Massima Sicurezza",
+        description: "Equipaggiamento completo, assicurazione e briefing dettagliato pre-partenza"
+      },
+      {
+        icon: "🌟",
+        title: "Esperienza Unica",
+        description: "Percorsi esclusivi che ti porteranno dove altri tour non arrivano mai"
+      },
+      {
+        icon: "💯",
+        title: "Soddisfatti o Rimborsati",
+        description: "Garanzia 100% di soddisfazione o rimborso completo entro 24 ore"
+      }
+    ]
+  },
+  en: {
+    title: "Why Choose Tenerife Quad Experience",
+    subtitle: "Your quad adventure with maximum safety and professionalism",
+    features: [
+      {
+        icon: "🏆",
+        title: "Expert Guides",
+        description: "Certified local guides with years of experience who know every corner of the island"
+      },
+      {
+        icon: "🚗",
+        title: "Latest Generation Quads",
+        description: "Modern fleet with automatic 4x4 quads, safe and easy to drive for everyone"
+      },
+      {
+        icon: "📸",
+        title: "Photos Included",
+        description: "You'll receive all photos from your tour to keep these moments forever"
+      },
+      {
+        icon: "🛡️",
+        title: "Maximum Safety",
+        description: "Complete equipment, insurance and detailed pre-departure briefing"
+      },
+      {
+        icon: "🌟",
+        title: "Unique Experience",
+        description: "Exclusive routes that will take you where other tours never reach"
+      },
+      {
+        icon: "💯",
+        title: "Satisfied or Refunded",
+        description: "100% satisfaction guarantee or full refund within 24 hours"
+      }
+    ]
+  },
+  es: {
+    title: "Por Qué Elegir Tenerife Quad Experience",
+    subtitle: "Tu aventura en quad con máxima seguridad y profesionalidad",
+    features: [
+      {
+        icon: "🏆",
+        title: "Guías Expertos",
+        description: "Guías locales certificados con años de experiencia que conocen cada rincón de la isla"
+      },
+      {
+        icon: "🚗",
+        title: "Quads de Última Generación",
+        description: "Flota moderna con quads 4x4 automáticos, seguros y fáciles de conducir para todos"
+      },
+      {
+        icon: "📸",
+        title: "Fotos Incluidas",
+        description: "Recibirás todas las fotos de tu tour para conservar estos momentos para siempre"
+      },
+      {
+        icon: "🛡️",
+        title: "Máxima Seguridad",
+        description: "Equipamiento completo, seguro y briefing detallado antes de la salida"
+      },
+      {
+        icon: "🌟",
+        title: "Experiencia Única",
+        description: "Rutas exclusivas que te llevarán donde otros tours nunca llegan"
+      },
+      {
+        icon: "💯",
+        title: "Satisfecho o Reembolsado",
+        description: "Garantía 100% de satisfacción o reembolso completo en 24 horas"
+      }
+    ]
+  },
+  fr: {
+    title: "Pourquoi Choisir Tenerife Quad Experience",
+    subtitle: "Votre aventure en quad avec un maximum de sécurité et de professionnalisme",
+    features: [
+      {
+        icon: "🏆",
+        title: "Guides Experts",
+        description: "Guides locaux certifiés avec des années d'expérience qui connaissent chaque recoin de l'île"
+      },
+      {
+        icon: "🚗",
+        title: "Quads Dernière Génération",
+        description: "Flotte moderne avec quads 4x4 automatiques, sûrs et faciles à conduire pour tous"
+      },
+      {
+        icon: "📸",
+        title: "Photos Incluses",
+        description: "Vous recevrez toutes les photos de votre tour pour garder ces moments pour toujours"
+      },
+      {
+        icon: "🛡️",
+        title: "Sécurité Maximale",
+        description: "Équipement complet, assurance et briefing détaillé avant le départ"
+      },
+      {
+        icon: "🌟",
+        title: "Expérience Unique",
+        description: "Parcours exclusifs qui vous emmèneront là où d'autres tours n'arrivent jamais"
+      },
+      {
+        icon: "💯",
+        title: "Satisfait ou Remboursé",
+        description: "Garantie 100% satisfaction ou remboursement complet sous 24 heures"
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {currentContent.title}
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        {currentContent.subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {currentContent.features.map((feature) => (
+        <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="text-4xl mb-4">{feature.icon}</div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            {feature.title}
+          </h3>
+          <p class="text-gray-600">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

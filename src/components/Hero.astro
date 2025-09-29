@@ -1,0 +1,71 @@
+---
+export interface Props {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink: string;
+  videoSrc?: string;
+  backgroundImage?: string;
+}
+
+const {
+  title,
+  subtitle,
+  ctaText,
+  ctaLink,
+  videoSrc = "/videos/hero-background.mp4",
+  backgroundImage = "/images/hero-fallback.jpg"
+} = Astro.props;
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Video Background -->
+  {videoSrc && (
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute top-0 left-0 w-full h-full object-cover z-0"
+      poster={backgroundImage}
+    >
+      <source src={videoSrc} type="video/mp4" />
+    </video>
+  )}
+
+  <!-- Fallback Background Image -->
+  {!videoSrc && (
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-cover bg-center z-0"
+      style={`background-image: url('${backgroundImage}')`}
+    ></div>
+  )}
+
+  <!-- Dark Overlay -->
+  <div class="absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
+
+  <!-- Content -->
+  <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+      {title}
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl mx-auto">
+      {subtitle}
+    </p>
+    <a
+      href={ctaLink}
+      class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+    >
+      {ctaText}
+    </a>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+    <div class="animate-bounce">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+</section>

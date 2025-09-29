@@ -1,0 +1,189 @@
+---
+export interface Props {
+  lang: 'it' | 'en' | 'es' | 'fr';
+}
+
+const { lang } = Astro.props;
+
+const content = {
+  it: {
+    title: "Cosa Dicono i Nostri Clienti",
+    subtitle: "Oltre 1000 avventurieri soddisfatti hanno scelto la nostra esperienza",
+    testimonials: [
+      {
+        name: "Marco Rossi",
+        location: "Milano, Italia",
+        avatar: "/images/avatars/marco.jpg",
+        rating: 5,
+        text: "Un'esperienza incredibile! Il tour del Teide è stato mozzafiato e le guide super professionali. Consiglio assolutamente!"
+      },
+      {
+        name: "Sarah Johnson",
+        location: "London, UK",
+        avatar: "/images/avatars/sarah.jpg",
+        rating: 5,
+        text: "Amazing adventure! The quad bikes were easy to handle and the views were spectacular. Best activity in Tenerife!"
+      },
+      {
+        name: "Carlos García",
+        location: "Madrid, España",
+        avatar: "/images/avatars/carlos.jpg",
+        rating: 5,
+        text: "Una experiencia única. Los paisajes volcánicos son impresionantes y el equipo muy profesional. ¡Volveremos!"
+      }
+    ]
+  },
+  en: {
+    title: "What Our Customers Say",
+    subtitle: "Over 1000 satisfied adventurers have chosen our experience",
+    testimonials: [
+      {
+        name: "Marco Rossi",
+        location: "Milano, Italy",
+        avatar: "/images/avatars/marco.jpg",
+        rating: 5,
+        text: "Un'esperienza incredibile! Il tour del Teide è stato mozzafiato e le guide super professionali. Consiglio assolutamente!"
+      },
+      {
+        name: "Sarah Johnson",
+        location: "London, UK",
+        avatar: "/images/avatars/sarah.jpg",
+        rating: 5,
+        text: "Amazing adventure! The quad bikes were easy to handle and the views were spectacular. Best activity in Tenerife!"
+      },
+      {
+        name: "Carlos García",
+        location: "Madrid, Spain",
+        avatar: "/images/avatars/carlos.jpg",
+        rating: 5,
+        text: "Una experiencia única. Los paisajes volcánicos son impresionantes y el equipo muy profesional. ¡Volveremos!"
+      }
+    ]
+  },
+  es: {
+    title: "Lo Que Dicen Nuestros Clientes",
+    subtitle: "Más de 1000 aventureros satisfechos han elegido nuestra experiencia",
+    testimonials: [
+      {
+        name: "Marco Rossi",
+        location: "Milán, Italia",
+        avatar: "/images/avatars/marco.jpg",
+        rating: 5,
+        text: "Un'esperienza incredibile! Il tour del Teide è stato mozzafiato e le guide super professionali. Consiglio assolutamente!"
+      },
+      {
+        name: "Sarah Johnson",
+        location: "Londres, Reino Unido",
+        avatar: "/images/avatars/sarah.jpg",
+        rating: 5,
+        text: "Amazing adventure! The quad bikes were easy to handle and the views were spectacular. Best activity in Tenerife!"
+      },
+      {
+        name: "Carlos García",
+        location: "Madrid, España",
+        avatar: "/images/avatars/carlos.jpg",
+        rating: 5,
+        text: "Una experiencia única. Los paisajes volcánicos son impresionantes y el equipo muy profesional. ¡Volveremos!"
+      }
+    ]
+  },
+  fr: {
+    title: "Ce Que Disent Nos Clients",
+    subtitle: "Plus de 1000 aventuriers satisfaits ont choisi notre expérience",
+    testimonials: [
+      {
+        name: "Marco Rossi",
+        location: "Milan, Italie",
+        avatar: "/images/avatars/marco.jpg",
+        rating: 5,
+        text: "Un'esperienza incredibile! Il tour del Teide è stato mozzafiato e le guide super professionali. Consiglio assolutamente!"
+      },
+      {
+        name: "Sarah Johnson",
+        location: "Londres, Royaume-Uni",
+        avatar: "/images/avatars/sarah.jpg",
+        rating: 5,
+        text: "Amazing adventure! The quad bikes were easy to handle and the views were spectacular. Best activity in Tenerife!"
+      },
+      {
+        name: "Carlos García",
+        location: "Madrid, Espagne",
+        avatar: "/images/avatars/carlos.jpg",
+        rating: 5,
+        text: "Una experiencia única. Los paisajes volcánicos son impresionantes y el equipo muy profesional. ¡Volveremos!"
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {currentContent.title}
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        {currentContent.subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {currentContent.testimonials.map((testimonial) => (
+        <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <!-- Rating Stars -->
+          <div class="flex items-center mb-4">
+            {[...Array(testimonial.rating)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+
+          <!-- Quote -->
+          <blockquote class="text-gray-700 italic mb-6">
+            "{testimonial.text}"
+          </blockquote>
+
+          <!-- Author -->
+          <div class="flex items-center">
+            <img
+              src={testimonial.avatar}
+              alt={testimonial.name}
+              class="w-12 h-12 rounded-full mr-4 object-cover"
+              loading="lazy"
+            />
+            <div>
+              <div class="font-semibold text-gray-900">{testimonial.name}</div>
+              <div class="text-sm text-gray-500">{testimonial.location}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="mt-12 text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <div class="text-3xl font-bold text-orange-500">1000+</div>
+          <div class="text-sm text-gray-600">{lang === 'it' ? 'Clienti Soddisfatti' : lang === 'en' ? 'Happy Customers' : lang === 'es' ? 'Clientes Felices' : 'Clients Satisfaits'}</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-orange-500">4.9</div>
+          <div class="text-sm text-gray-600">{lang === 'it' ? 'Valutazione Media' : lang === 'en' ? 'Average Rating' : lang === 'es' ? 'Valoración Media' : 'Note Moyenne'}</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-orange-500">5</div>
+          <div class="text-sm text-gray-600">{lang === 'it' ? 'Anni di Esperienza' : lang === 'en' ? 'Years Experience' : lang === 'es' ? 'Años de Experiencia' : 'Années d\'Expérience'}</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-orange-500">100%</div>
+          <div class="text-sm text-gray-600">{lang === 'it' ? 'Sicurezza Garantita' : lang === 'en' ? 'Safety Guaranteed' : lang === 'es' ? 'Seguridad Garantizada' : 'Sécurité Garantie'}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

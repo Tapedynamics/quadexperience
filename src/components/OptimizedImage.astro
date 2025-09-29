@@ -1,0 +1,98 @@
+---
+import { generateSrcSet, generateSizes, getOptimizedImageUrl, generatePlaceholder } from '../utils/imageUtils';
+
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  format?: 'webp' | 'jpg' | 'png' | 'avif';
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  class?: string;
+  placeholder?: boolean;
+  responsive?: boolean;
+  widths?: number[];
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  quality = 80,
+  format = 'webp',
+  loading = 'lazy',
+  sizes = generateSizes(),
+  class: className = '',
+  placeholder = true,
+  responsive = true,
+  widths = [320, 640, 768, 1024, 1280, 1920]
+} = Astro.props;
+
+const optimizedSrc = getOptimizedImageUrl(src, { width, height, quality, format });
+const srcset = responsive ? generateSrcSet(src, widths) : undefined;
+const placeholderSrc = placeholder ? generatePlaceholder(width, height) : undefined;
+
+// CSS classes for lazy loading
+const lazyClasses = loading === 'lazy' ? 'lazy-loading' : '';
+---
+
+<img
+  {loading}
+  src={loading === 'lazy' ? placeholderSrc : optimizedSrc}
+  {srcset}
+  {sizes}
+  {alt}
+  {width}
+  {height}
+  class={`transition-opacity duration-300 ${lazyClasses} ${className}`}
+  data-src={loading === 'lazy' ? optimizedSrc : undefined}
+  data-srcset={loading === 'lazy' ? srcset : undefined}
+  decoding="async"
+/>
+
+{loading === 'lazy' && (
+  <script>
+    import { LazyImageLoader } from '../utils/imageUtils';
+
+    // Initialize lazy loading when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const lazyLoader = new LazyImageLoader({
+        rootMargin: '50px',
+        threshold: 0.1
+      });
+
+      // Observe all lazy loading images
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      lazyImages.forEach(img => {
+        lazyLoader.observe(img);
+      });
+    });
+  </script>
+)}
+
+<style>
+  .lazy-loading {
+    opacity: 0.6;
+    filter: blur(2px);
+  }
+
+  .lazy-loaded {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* Smooth transition for lazy loaded images */
+  img {
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+  }
+
+  /* Aspect ratio preservation */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

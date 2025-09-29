@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import USPSection from '../components/USPSection.astro';
+import PriceTable from '../components/PriceTable.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'it';
+const currentPath = '/';
+
+const heroContent = {
+  title: "Avventure in Quad a Tenerife",
+  subtitle: "Esplora i paesaggi vulcanici e le coste spettacolari delle Canarie con i nostri tour guidati",
+  ctaText: "Prenota la Tua Avventura",
+  ctaLink: "/contatti"
+};
+
+const ctaContent = {
+  title: "Pronto per l'Avventura?",
+  subtitle: "Prenota ora il tuo tour in quad e scopri Tenerife come mai prima d'ora",
+  primaryCTA: {
+    text: "Prenota Ora",
+    link: "/contatti"
+  },
+  secondaryCTA: {
+    text: "Vedi Tutti i Tour",
+    link: "/tour"
+  }
+};
+---
+
+<BaseLayout
+  title="Tenerife Quad Experience - Tour in Quad alle Canarie"
+  description="Scopri Tenerife con i nostri tour in quad. Esplora il vulcano Teide e le coste spettacolari con guide professionali. Prenota la tua avventura!"
+  lang={lang}
+  organization={true}
+>
+  <Header lang={lang} currentPath={currentPath} />
+
+  <Hero
+    title={heroContent.title}
+    subtitle={heroContent.subtitle}
+    ctaText={heroContent.ctaText}
+    ctaLink={heroContent.ctaLink}
+    videoSrc="/videos/hero-quad-tenerife.mp4"
+    backgroundImage="/images/tenerife-quad-hero.jpg"
+  />
+
+  <USPSection lang={lang} />
+
+  <PriceTable lang={lang} />
+
+  <Testimonial lang={lang} />
+
+  <FAQ lang={lang} />
+
+  <CTA
+    title={ctaContent.title}
+    subtitle={ctaContent.subtitle}
+    primaryCTA={ctaContent.primaryCTA}
+    secondaryCTA={ctaContent.secondaryCTA}
+    backgroundImage="/images/cta-teide-sunset.jpg"
+  />
+
+  <Footer lang={lang} />
+</BaseLayout>

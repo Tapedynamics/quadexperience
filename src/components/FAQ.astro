@@ -1,0 +1,227 @@
+---
+export interface Props {
+  lang: 'it' | 'en' | 'es' | 'fr';
+}
+
+const { lang } = Astro.props;
+
+const content = {
+  it: {
+    title: "Domande Frequenti",
+    subtitle: "Tutto quello che devi sapere sui nostri tour in quad",
+    faqs: [
+      {
+        question: "È necessaria la patente di guida?",
+        answer: "Sì, è necessaria una patente di guida valida. Accettiamo patenti di tutti i paesi europei e internazionali con traduzione ufficiale."
+      },
+      {
+        question: "Qual è l'età minima per partecipare?",
+        answer: "L'età minima è 18 anni per guidare. I passeggeri possono avere minimo 8 anni se accompagnati da un adulto."
+      },
+      {
+        question: "Cosa succede in caso di maltempo?",
+        answer: "In caso di condizioni meteo avverse, il tour viene rinviato o rimborsato completamente. La sicurezza è la nostra priorità assoluta."
+      },
+      {
+        question: "È incluso il carburante?",
+        answer: "Sì, il carburante è incluso nel prezzo del tour. Non ci sono costi aggiuntivi nascosti."
+      },
+      {
+        question: "Posso cancellare la prenotazione?",
+        answer: "Sì, puoi cancellare gratuitamente fino a 24 ore prima del tour. Entro 24 ore si applica una penale del 50%."
+      },
+      {
+        question: "Riceverò le foto del tour?",
+        answer: "Assolutamente sì! Le nostre guide scattano foto durante tutto il tour e te le invieremo entro 24 ore via email."
+      }
+    ]
+  },
+  en: {
+    title: "Frequently Asked Questions",
+    subtitle: "Everything you need to know about our quad tours",
+    faqs: [
+      {
+        question: "Is a driving license required?",
+        answer: "Yes, a valid driving license is required. We accept licenses from all European countries and international licenses with official translation."
+      },
+      {
+        question: "What is the minimum age to participate?",
+        answer: "The minimum age is 18 years to drive. Passengers can be minimum 8 years old if accompanied by an adult."
+      },
+      {
+        question: "What happens in case of bad weather?",
+        answer: "In case of adverse weather conditions, the tour is postponed or fully refunded. Safety is our absolute priority."
+      },
+      {
+        question: "Is fuel included?",
+        answer: "Yes, fuel is included in the tour price. There are no hidden additional costs."
+      },
+      {
+        question: "Can I cancel my booking?",
+        answer: "Yes, you can cancel free of charge up to 24 hours before the tour. Within 24 hours a 50% penalty applies."
+      },
+      {
+        question: "Will I receive photos from the tour?",
+        answer: "Absolutely yes! Our guides take photos throughout the tour and we'll send them to you within 24 hours via email."
+      }
+    ]
+  },
+  es: {
+    title: "Preguntas Frecuentes",
+    subtitle: "Todo lo que necesitas saber sobre nuestros tours en quad",
+    faqs: [
+      {
+        question: "¿Es necesario el carnet de conducir?",
+        answer: "Sí, se requiere un carnet de conducir válido. Aceptamos carnets de todos los países europeos e internacionales con traducción oficial."
+      },
+      {
+        question: "¿Cuál es la edad mínima para participar?",
+        answer: "La edad mínima es 18 años para conducir. Los pasajeros pueden tener mínimo 8 años si van acompañados de un adulto."
+      },
+      {
+        question: "¿Qué pasa en caso de mal tiempo?",
+        answer: "En caso de condiciones meteorológicas adversas, el tour se pospone o se reembolsa completamente. La seguridad es nuestra prioridad absoluta."
+      },
+      {
+        question: "¿Está incluido el combustible?",
+        answer: "Sí, el combustible está incluido en el precio del tour. No hay costos adicionales ocultos."
+      },
+      {
+        question: "¿Puedo cancelar mi reserva?",
+        answer: "Sí, puedes cancelar gratuitamente hasta 24 horas antes del tour. Dentro de 24 horas se aplica una penalización del 50%."
+      },
+      {
+        question: "¿Recibiré las fotos del tour?",
+        answer: "¡Absolutamente sí! Nuestros guías toman fotos durante todo el tour y te las enviaremos en 24 horas por email."
+      }
+    ]
+  },
+  fr: {
+    title: "Questions Fréquemment Posées",
+    subtitle: "Tout ce que vous devez savoir sur nos tours en quad",
+    faqs: [
+      {
+        question: "Un permis de conduire est-il nécessaire?",
+        answer: "Oui, un permis de conduire valide est requis. Nous acceptons les permis de tous les pays européens et internationaux avec traduction officielle."
+      },
+      {
+        question: "Quel est l'âge minimum pour participer?",
+        answer: "L'âge minimum est de 18 ans pour conduire. Les passagers peuvent avoir minimum 8 ans s'ils sont accompagnés d'un adulte."
+      },
+      {
+        question: "Que se passe-t-il en cas de mauvais temps?",
+        answer: "En cas de conditions météorologiques défavorables, le tour est reporté ou entièrement remboursé. La sécurité est notre priorité absolue."
+      },
+      {
+        question: "Le carburant est-il inclus?",
+        answer: "Oui, le carburant est inclus dans le prix du tour. Il n'y a pas de coûts additionnels cachés."
+      },
+      {
+        question: "Puis-je annuler ma réservation?",
+        answer: "Oui, vous pouvez annuler gratuitement jusqu'à 24 heures avant le tour. En deçà de 24 heures, une pénalité de 50% s'applique."
+      },
+      {
+        question: "Vais-je recevoir les photos du tour?",
+        answer: "Absolument oui! Nos guides prennent des photos tout au long du tour et nous vous les enverrons dans les 24 heures par email."
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {currentContent.title}
+      </h2>
+      <p class="text-xl text-gray-600">
+        {currentContent.subtitle}
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      {currentContent.faqs.map((faq, index) => (
+        <div class="border border-gray-200 rounded-lg">
+          <button
+            class="w-full px-6 py-4 text-left focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 rounded-lg"
+            onclick={`toggleFAQ(${index})`}
+          >
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-gray-900">
+                {faq.question}
+              </h3>
+              <svg
+                id={`arrow-${index}`}
+                class="w-5 h-5 text-gray-500 transform transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </button>
+
+          <div
+            id={`content-${index}`}
+            class="hidden px-6 pb-4"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="text-center mt-12">
+      <p class="text-gray-600 mb-4">
+        {lang === 'it' && 'Hai altre domande? Non esitare a contattarci!'}
+        {lang === 'en' && 'Have more questions? Don\'t hesitate to contact us!'}
+        {lang === 'es' && '¿Tienes más preguntas? ¡No dudes en contactarnos!'}
+        {lang === 'fr' && 'Vous avez d\'autres questions? N\'hésitez pas à nous contacter!'}
+      </p>
+      <a
+        href={lang === 'it' ? '/contatti' : `/${lang}/contact`}
+        class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+      >
+        {lang === 'it' && 'Contattaci'}
+        {lang === 'en' && 'Contact Us'}
+        {lang === 'es' && 'Contáctanos'}
+        {lang === 'fr' && 'Contactez-nous'}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleFAQ(index) {
+    const content = document.getElementById(`content-${index}`);
+    const arrow = document.getElementById(`arrow-${index}`);
+
+    if (content.classList.contains('hidden')) {
+      // Close all other FAQs
+      document.querySelectorAll('[id^="content-"]').forEach(el => {
+        if (el !== content) {
+          el.classList.add('hidden');
+        }
+      });
+      document.querySelectorAll('[id^="arrow-"]').forEach(el => {
+        if (el !== arrow) {
+          el.classList.remove('rotate-180');
+        }
+      });
+
+      // Open current FAQ
+      content.classList.remove('hidden');
+      arrow.classList.add('rotate-180');
+    } else {
+      content.classList.add('hidden');
+      arrow.classList.remove('rotate-180');
+    }
+  }
+</script>

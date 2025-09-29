@@ -1,0 +1,135 @@
+---
+export interface Props {
+  lang: 'it' | 'en' | 'es' | 'fr';
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+
+const navItems = {
+  it: [
+    { label: 'Home', href: '/' },
+    { label: 'Tour', href: '/tour' },
+    { label: 'Prezzi', href: '/prezzi' },
+    { label: 'Galleria', href: '/galleria' },
+    { label: 'Contatti', href: '/contatti' }
+  ],
+  en: [
+    { label: 'Home', href: '/en' },
+    { label: 'Tours', href: '/en/tours' },
+    { label: 'Prices', href: '/en/prices' },
+    { label: 'Gallery', href: '/en/gallery' },
+    { label: 'Contact', href: '/en/contact' }
+  ],
+  es: [
+    { label: 'Inicio', href: '/es' },
+    { label: 'Tours', href: '/es/tours' },
+    { label: 'Precios', href: '/es/precios' },
+    { label: 'Galería', href: '/es/galeria' },
+    { label: 'Contacto', href: '/es/contacto' }
+  ],
+  fr: [
+    { label: 'Accueil', href: '/fr' },
+    { label: 'Tours', href: '/fr/tours' },
+    { label: 'Prix', href: '/fr/prix' },
+    { label: 'Galerie', href: '/fr/galerie' },
+    { label: 'Contact', href: '/fr/contact' }
+  ]
+};
+
+const languages = [
+  { code: 'it', label: 'IT', flag: '🇮🇹' },
+  { code: 'en', label: 'EN', flag: '🇬🇧' },
+  { code: 'es', label: 'ES', flag: '🇪🇸' },
+  { code: 'fr', label: 'FR', flag: '🇫🇷' }
+];
+
+const currentNavItems = navItems[lang];
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+  <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href={lang === 'it' ? '/' : `/${lang}`} class="flex items-center space-x-2">
+      <img src="/images/logo.png" alt="Tenerife Quad Experience" class="h-8 w-auto" />
+      <span class="text-xl font-bold text-gray-900">QuadExperience</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center space-x-8">
+      {currentNavItems.map(item => (
+        <a
+          href={item.href}
+          class={`text-gray-700 hover:text-orange-500 transition-colors font-medium ${
+            currentPath === item.href ? 'text-orange-500' : ''
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Language Switcher & Mobile Menu -->
+    <div class="flex items-center space-x-4">
+      <!-- Language Switcher -->
+      <div class="relative group">
+        <button class="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors">
+          <span class="text-sm">{languages.find(l => l.code === lang)?.flag}</span>
+          <span class="text-sm font-medium">{languages.find(l => l.code === lang)?.label}</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <!-- Language Dropdown -->
+        <div class="absolute top-full right-0 mt-2 py-2 w-32 bg-white rounded-md shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          {languages.map(language => (
+            <a
+              href={language.code === 'it' ? currentPath.replace(/^\/(en|es|fr)/, '') || '/' : `/${language.code}${currentPath.replace(/^\/(en|es|fr)/, '')}`}
+              class={`flex items-center space-x-2 px-4 py-2 text-sm hover:bg-gray-100 ${
+                language.code === lang ? 'text-orange-500 bg-gray-50' : 'text-gray-700'
+              }`}
+            >
+              <span>{language.flag}</span>
+              <span>{language.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 rounded-md hover:bg-gray-100" id="mobile-menu-btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="hidden md:hidden bg-white border-t" id="mobile-menu">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      {currentNavItems.map(item => (
+        <a
+          href={item.href}
+          class={`block py-2 text-gray-700 hover:text-orange-500 transition-colors font-medium ${
+            currentPath === item.href ? 'text-orange-500' : ''
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+  });
+</script>

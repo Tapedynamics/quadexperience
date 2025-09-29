@@ -1,0 +1,367 @@
+---
+export interface Props {
+  lang: 'it' | 'en' | 'es' | 'fr';
+}
+
+const { lang } = Astro.props;
+
+const content = {
+  it: {
+    title: "Scegli il Tuo Tour Perfetto",
+    subtitle: "Prezzi trasparenti, nessun costo nascosto",
+    currency: "€",
+    bookNow: "Prenota Ora",
+    popular: "Più Popolare",
+    features: {
+      duration: "Durata",
+      guide: "Guida professionale",
+      equipment: "Attrezzatura inclusa",
+      photos: "Foto incluse",
+      insurance: "Assicurazione",
+      pickup: "Trasporto hotel",
+      refreshments: "Rinfreschi"
+    },
+    tours: [
+      {
+        name: "Tour Costiero",
+        subtitle: "Perfetto per principianti",
+        price: 65,
+        duration: "2.5 ore",
+        popular: false,
+        features: [
+          "Guida professionale",
+          "Attrezzatura inclusa",
+          "Foto incluse",
+          "Assicurazione"
+        ],
+        excluded: [
+          "Trasporto hotel",
+          "Rinfreschi"
+        ]
+      },
+      {
+        name: "Tour del Teide",
+        subtitle: "L'avventura più emozionante",
+        price: 89,
+        duration: "4 ore",
+        popular: true,
+        features: [
+          "Guida professionale",
+          "Attrezzatura inclusa",
+          "Foto incluse",
+          "Assicurazione",
+          "Rinfreschi"
+        ],
+        excluded: [
+          "Trasporto hotel"
+        ]
+      },
+      {
+        name: "Tour Completo VIP",
+        subtitle: "L'esperienza definitiva",
+        price: 125,
+        duration: "6 ore",
+        popular: false,
+        features: [
+          "Guida professionale",
+          "Attrezzatura inclusa",
+          "Foto incluse",
+          "Assicurazione",
+          "Trasporto hotel",
+          "Rinfreschi",
+          "Pranzo incluso"
+        ],
+        excluded: []
+      }
+    ]
+  },
+  en: {
+    title: "Choose Your Perfect Tour",
+    subtitle: "Transparent prices, no hidden costs",
+    currency: "€",
+    bookNow: "Book Now",
+    popular: "Most Popular",
+    features: {
+      duration: "Duration",
+      guide: "Professional guide",
+      equipment: "Equipment included",
+      photos: "Photos included",
+      insurance: "Insurance",
+      pickup: "Hotel pickup",
+      refreshments: "Refreshments"
+    },
+    tours: [
+      {
+        name: "Coastal Tour",
+        subtitle: "Perfect for beginners",
+        price: 65,
+        duration: "2.5 hours",
+        popular: false,
+        features: [
+          "Professional guide",
+          "Equipment included",
+          "Photos included",
+          "Insurance"
+        ],
+        excluded: [
+          "Hotel pickup",
+          "Refreshments"
+        ]
+      },
+      {
+        name: "Teide Tour",
+        subtitle: "The most exciting adventure",
+        price: 89,
+        duration: "4 hours",
+        popular: true,
+        features: [
+          "Professional guide",
+          "Equipment included",
+          "Photos included",
+          "Insurance",
+          "Refreshments"
+        ],
+        excluded: [
+          "Hotel pickup"
+        ]
+      },
+      {
+        name: "Complete VIP Tour",
+        subtitle: "The ultimate experience",
+        price: 125,
+        duration: "6 hours",
+        popular: false,
+        features: [
+          "Professional guide",
+          "Equipment included",
+          "Photos included",
+          "Insurance",
+          "Hotel pickup",
+          "Refreshments",
+          "Lunch included"
+        ],
+        excluded: []
+      }
+    ]
+  },
+  es: {
+    title: "Elige Tu Tour Perfecto",
+    subtitle: "Precios transparentes, sin costos ocultos",
+    currency: "€",
+    bookNow: "Reservar",
+    popular: "Más Popular",
+    features: {
+      duration: "Duración",
+      guide: "Guía profesional",
+      equipment: "Equipo incluido",
+      photos: "Fotos incluidas",
+      insurance: "Seguro",
+      pickup: "Recogida hotel",
+      refreshments: "Refrescos"
+    },
+    tours: [
+      {
+        name: "Tour Costero",
+        subtitle: "Perfecto para principiantes",
+        price: 65,
+        duration: "2.5 horas",
+        popular: false,
+        features: [
+          "Guía profesional",
+          "Equipo incluido",
+          "Fotos incluidas",
+          "Seguro"
+        ],
+        excluded: [
+          "Recogida hotel",
+          "Refrescos"
+        ]
+      },
+      {
+        name: "Tour del Teide",
+        subtitle: "La aventura más emocionante",
+        price: 89,
+        duration: "4 horas",
+        popular: true,
+        features: [
+          "Guía profesional",
+          "Equipo incluido",
+          "Fotos incluidas",
+          "Seguro",
+          "Refrescos"
+        ],
+        excluded: [
+          "Recogida hotel"
+        ]
+      },
+      {
+        name: "Tour Completo VIP",
+        subtitle: "La experiencia definitiva",
+        price: 125,
+        duration: "6 horas",
+        popular: false,
+        features: [
+          "Guía profesional",
+          "Equipo incluido",
+          "Fotos incluidas",
+          "Seguro",
+          "Recogida hotel",
+          "Refrescos",
+          "Almuerzo incluido"
+        ],
+        excluded: []
+      }
+    ]
+  },
+  fr: {
+    title: "Choisissez Votre Tour Parfait",
+    subtitle: "Prix transparents, aucun coût caché",
+    currency: "€",
+    bookNow: "Réserver",
+    popular: "Plus Populaire",
+    features: {
+      duration: "Durée",
+      guide: "Guide professionnel",
+      equipment: "Équipement inclus",
+      photos: "Photos incluses",
+      insurance: "Assurance",
+      pickup: "Ramassage hôtel",
+      refreshments: "Rafraîchissements"
+    },
+    tours: [
+      {
+        name: "Tour Côtier",
+        subtitle: "Parfait pour les débutants",
+        price: 65,
+        duration: "2.5 heures",
+        popular: false,
+        features: [
+          "Guide professionnel",
+          "Équipement inclus",
+          "Photos incluses",
+          "Assurance"
+        ],
+        excluded: [
+          "Ramassage hôtel",
+          "Rafraîchissements"
+        ]
+      },
+      {
+        name: "Tour du Teide",
+        subtitle: "L'aventure la plus excitante",
+        price: 89,
+        duration: "4 heures",
+        popular: true,
+        features: [
+          "Guide professionnel",
+          "Équipement inclus",
+          "Photos incluses",
+          "Assurance",
+          "Rafraîchissements"
+        ],
+        excluded: [
+          "Ramassage hôtel"
+        ]
+      },
+      {
+        name: "Tour Complet VIP",
+        subtitle: "L'expérience ultime",
+        price: 125,
+        duration: "6 heures",
+        popular: false,
+        features: [
+          "Guide professionnel",
+          "Équipement inclus",
+          "Photos incluses",
+          "Assurance",
+          "Ramassage hôtel",
+          "Rafraîchissements",
+          "Déjeuner inclus"
+        ],
+        excluded: []
+      }
+    ]
+  }
+};
+
+const currentContent = content[lang];
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {currentContent.title}
+      </h2>
+      <p class="text-xl text-gray-600">
+        {currentContent.subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      {currentContent.tours.map((tour, index) => (
+        <div class={`relative bg-white rounded-xl shadow-lg p-8 ${tour.popular ? 'ring-2 ring-orange-500 ring-opacity-50 transform scale-105' : ''}`}>
+          {tour.popular && (
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                {currentContent.popular}
+              </span>
+            </div>
+          )}
+
+          <!-- Header -->
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">{tour.name}</h3>
+            <p class="text-gray-600 mb-4">{tour.subtitle}</p>
+            <div class="text-4xl font-bold text-orange-500 mb-2">
+              {currentContent.currency}{tour.price}
+            </div>
+            <div class="text-gray-500 text-sm">{tour.duration}</div>
+          </div>
+
+          <!-- Features -->
+          <div class="space-y-3 mb-8">
+            {tour.features.map((feature) => (
+              <div class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">{feature}</span>
+              </div>
+            ))}
+            {tour.excluded.map((excluded) => (
+              <div class="flex items-center opacity-50">
+                <svg class="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                <span class="text-gray-500">{excluded}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA -->
+          <a
+            href={`#contact-${index}`}
+            class={`block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-200 ${
+              tour.popular
+                ? 'bg-orange-500 hover:bg-orange-600 text-white'
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+            }`}
+          >
+            {currentContent.bookNow}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional Info -->
+    <div class="text-center mt-12 text-gray-600">
+      <p class="text-sm">
+        {lang === 'it' && 'Tutti i prezzi sono per persona. Sconti disponibili per gruppi di 4+ persone.'}
+        {lang === 'en' && 'All prices are per person. Group discounts available for 4+ people.'}
+        {lang === 'es' && 'Todos los precios son por persona. Descuentos grupales disponibles para 4+ personas.'}
+        {lang === 'fr' && 'Tous les prix sont par personne. Remises de groupe disponibles pour 4+ personnes.'}
+      </p>
+    </div>
+  </div>
+</section>
